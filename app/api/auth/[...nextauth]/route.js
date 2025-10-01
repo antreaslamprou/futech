@@ -19,16 +19,14 @@ const handler = NextAuth({
         const user = await getUserByEmail(credentials.email);
         if (!user) return null;
 
-        console.log("Credentials", credentials.password);
-        console.log("User", user.password);
         const isValid = await bcrypt.compare(credentials.password, user.password);
         if (!isValid) return null;
 
         return {
           id: user.id,
           email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
+          firstName: user.firstname,
+          lastName: user.lastname,
           address: user.address,
           country: user.country
         };

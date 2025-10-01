@@ -10,11 +10,7 @@ import FullPageLoader from 'components/FullPageLoader';
 
 export default function Account() {
   const user = useSelector((state) => state.currentUser.user);
-  console.log("Redux user:", user);
-
-  const { data: session } = useSession();
-  console.log(session?.user); 
-
+  
   const { status } = useSession();
   const router = useRouter();
 

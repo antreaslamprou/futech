@@ -14,7 +14,6 @@ function SessionSync({ children }) {
 
   useEffect(() => {
     if (status === "authenticated") {
-      console.log("Dispatching user to Redux:", session?.user);
       dispatch(setUser(session.user));
     } else if (status === "unauthenticated") {
       dispatch(clearUser());
