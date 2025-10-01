@@ -18,19 +18,19 @@ export default function Head() {
       <link
         rel="preload"
         as="image"
-        href={`/images/NeuroLens.webp`}
+        href="/images/NeuroLens.webp"
         type="image/webp"
       />
       <link
         rel="preload"
         as="image"
-        href={`/images/EchoSkin.webp`}
+        href="/images/EchoSkin.webp"
         type="image/webp"
       />
       <link
         rel="preload"
         as="image"
-        href={`/images/CoreDrive.webp`}
+        href="/images/CoreDrive.webp"
         type="image/webp"
       />
     </>
