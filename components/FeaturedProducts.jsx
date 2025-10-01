@@ -1,26 +1,45 @@
 'use client';
 
 import { useState, useRef, useEffect } from "react";
+import { fetchProducts } from 'lib/api';
 import Image from 'next/image';
 import Link from "next/link";
-import products from "data/products.json";
+import FullPageLoader from "./FullPageLoader";
 
 export default function FeaturedProducts(){
-    const [currentProduct, setCurrentProduct] = useState(products[0]);
+    const [products, setProducts] = useState([]);
+    const [currentProduct, setCurrentProduct] = useState(null);
+
     const imageRef = useRef(null);
+    const nameRef = useRef(null);
     const titleRef = useRef(null);
-    const sloganRef = useRef(null);
+    
+    
+    useEffect(() => {
+        fetchProducts()
+        .then((prods) => {
+            setProducts(prods);
+            setCurrentProduct(prods[0]);
+        })
+        .catch(console.error);
+    },[]);
 
     useEffect(() => {
-        handleAnimation();
+        if (currentProduct) {
+            handleAnimation();
+        }
     },[currentProduct]);
+
+    if (!currentProduct) {
+        return <FullPageLoader />;
+    }
 
 
     function handleAnimation() {
         const refs = [
             {element: imageRef.current, animaton: "animate-fadeIn-scaleIn"},
-            {element: titleRef.current, animaton: "animate-slideIn-right"},
-            {element: sloganRef.current, animaton: "animate-slideIn-left"},
+            {element: nameRef.current, animaton: "animate-slideIn-right"},
+            {element: titleRef.current, animaton: "animate-slideIn-left"},
         ];
         refs.forEach(ref => {
             if (ref.element) {
@@ -47,16 +66,16 @@ export default function FeaturedProducts(){
                         priority
                     />
                     <h2 
-                        ref={titleRef}
+                        ref={nameRef}
                         className="text-4xl font-bold mb-2 z-1 text-shadow-lg text-shadow-futech-black hidden"
                     >
                         {currentProduct.name}
                     </h2>
                     <p 
-                        ref={sloganRef}
+                        ref={titleRef}
                         className="text-xl opacity-80 z-1 text-shadow-lg text-shadow-futech-black hidden"
                     >
-                        {currentProduct.slogan}
+                        {currentProduct.title}
                     </p>
                 </div>
             </Link>

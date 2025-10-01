@@ -62,8 +62,8 @@ export default function Product(props) {
             />
             <div className={`order-1 animate-fadeIn ${textAnimation}`}>
                 <h1 className={textAlign}>{props.product.name}</h1>
-                <h5 className={`text-center mt-1 ${textAlign}`}>{props.product.slogan}</h5>
-                <p className={`text-center mt-7 ${textAlign}`}>{props.product.text}</p>
+                <h5 className={`text-center mt-1 ${textAlign}`}>{props.product.title}</h5>
+                <p className={`text-center mt-7 ${textAlign}`}>{props.product.description}</p>
                 {props.showPrice !== false && (
                     <p className={`text-center mt-7 font-bold text-3xl ${textAlign}`}>${props.product.price}</p>
                 )}

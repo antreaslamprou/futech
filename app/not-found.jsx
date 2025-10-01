@@ -11,6 +11,7 @@ export default function PageNotFound() {
             width={160}
             height={160}
             alt="Error Icon"
+            unoptimized
         />
         <h1 className="mb-10 md:mb-15 text-center">Page Not Found</h1>
         
