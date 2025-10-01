@@ -1,0 +1,35 @@
+'use client';
+
+import { signIn } from "next-auth/react";
+import Image from 'next/image';
+
+export default function AuthButtons() {
+  const providers = [
+    { name: "google", color: "#000000"}, 
+    { name: "github", color: "#0c7600"}, 
+    { name: "facebook", color: "#3a559e"}, 
+  ];
+
+  return (<>
+    <hr className="h-0.5 bg-gray-500 w-full md:w-8/10 mt-10" />
+    <h4 className="w-min bg-futech-black px-8 md:px-10 -mt-3 mb-10">OR</h4>
+    <div className="auth-buttons">
+      { providers.map((provider) => (
+        <button 
+          key={provider.name} 
+          style={{ backgroundColor: provider.color }}
+          onClick={() => signIn(provider.name)} 
+        >
+          <Image 
+            src={`icons/${provider.name}.svg`} 
+            alt={provider.name} 
+            width={30}
+            height={30}
+            className="mr-3" 
+          />
+            Sign in with {provider.name.charAt(0).toUpperCase() + provider.name.slice(1)}
+        </button>
+      ))}
+    </div>
+  </>);
+}

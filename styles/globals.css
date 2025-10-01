@@ -1,0 +1,160 @@
+@import "tailwindcss";
+@import "./animations.css";
+@import "./fonts.css";
+
+@theme {
+  --color-futech-black: #0f1114;
+  --color-futech-white: #ffff;
+}
+
+
+/* Global scrollbar styling */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-futech-white) var(--color-futech-black); 
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--color-futech-black); 
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--color-futech-white);
+  border-radius: 5px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--color-futech-white);
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+
+@layer components {
+  html, body {
+    @apply bg-futech-black;
+  }
+
+  body {
+    @apply h-screen flex flex-col overflow-x-hidden; 
+  }
+
+  main {
+    @apply p-5 md:p-10 lg:p-20 flex-1 flex flex-col justify-center items-center w-full max-w-7xl mx-auto;
+  }
+
+  h1, h2, h3, h4, h5, nav .nav-item {
+    @apply font-ballega text-white h-min;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl text-center lg:text-start;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h5 {
+    @apply text-xl opacity-80;
+  }
+
+
+  p, li, input, select, option, label, button, a {
+    @apply font-timeburner text-white text-xl my-3 font-bold tracking-wider;
+  }
+
+  form {
+    @apply w-full;
+  }
+
+  .form-control{
+    @apply flex flex-col max-w-2xl w-full mx-auto gap-3 mb-3;
+  }
+
+  .form-control-2 {
+    @apply grid grid-cols-1 lg:grid-cols-2 lg:gap-8;
+  }
+
+  .form-control-3 {
+    @apply grid grid-cols-1 lg:grid-cols-2 lg:gap-8;
+  }
+
+  label {
+    @apply pointer-events-none text-gray-400 bg-futech-black absolute rounded-4xl -top-3 px-3 py-0 left-3 transition-[top,font-size] peer-placeholder-shown:top-6 peer-focus:text-futech-white peer-focus:-top-3;
+  }
+
+  input, select {
+    @apply outline-gray-500/50 outline-1 p-5 rounded-xl leading-normal focus:outline-0 focus:ring-2 focus:ring-futech-white block w-full bg-futech-black appearance-none;
+  }
+
+  select {
+    @apply bg-[url('/icons/arrow.svg')] bg-[length:1.5rem] bg-no-repeat bg-[right_0.75rem_center] cursor-pointer ;
+  }
+
+  button {
+    @apply cursor-pointer w-max disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .auth-buttons {
+    @apply flex flex-col md:flex-row gap-4 mx-auto;
+  }
+
+  .auth-buttons button {
+    @apply p-5 rounded-2xl flex items-center mx-auto w-auto text-left;
+  }
+
+  .products-grid .product {
+    @apply overflow-hidden py-15 md:py-25;
+  }
+
+  .btn, .btn-sm, .btn-lg {
+    @apply bg-futech-white text-futech-black px-8 py-4 rounded-full;
+  }
+  
+  .btn-sm {
+    @apply px-4 py-2;
+  }
+
+  .btn-lg {
+    @apply px-10 md:px-16 md:py-5 text-2xl;
+  }
+
+  nav {
+    @apply flex justify-between p-5;
+  }
+
+  nav .logo {
+    @apply w-20 cursor-pointer;
+  }
+
+  .nav-links {
+    @apply flex items-center;
+  }
+
+  .nav-item {
+    @apply mx-3 px-8 py-4 outline-gray-500/50 outline-1 rounded-4xl hover:outline-gray-500 text-xl md:text-2xl lg:text-3xl bg-[url('/images/BlackAnimation.gif')] bg-no-repeat bg-cover bg-fixed;
+  }
+
+  .nav-links.hide .nav-item {
+    @apply pointer-events-none;
+  }
+
+  .nav-links:not(.hide) .nav-item.active {
+    @apply outline-futech-white outline-2;
+  }
+
+}
