@@ -18,7 +18,8 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: "User already exists" }), { status: 409 });
     }
 
-    const hashed = await bcrypt.hash(password, process.env.BCRYPT_SALT_ROUNDS);
+    const BCRYPT_SALT_ROUNDS  = Number(process.env.BCRYPT_SALT_ROUNDS);
+    const hashed = await bcrypt.hash(password, BCRYPT_SALT_ROUNDS);
     const newUser = await createUser({ firstName, lastName, email, password: hashed, address, country });
 
     return new Response(JSON.stringify({ success: true, user: newUser }), {

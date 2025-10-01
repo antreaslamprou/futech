@@ -18,7 +18,6 @@ export default function InputField({ id, label, type = "text", value, className,
         const currentValue = e.target.value;
         setSelectedValue(currentValue);
         onChange(e); 
-        console.log(currentValue);
     };
 
     return (
