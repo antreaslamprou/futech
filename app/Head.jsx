@@ -1,8 +1,4 @@
-import { fetchAllProducts } from "@/lib/db";
-
-export default async function Head() {
-  const products = await fetchAllProducts();
-  
+export default function Head() {
   return (
     <>
       <link
@@ -19,15 +15,24 @@ export default async function Head() {
         type="font/otf"
         crossOrigin="anonymous"
       />
-      {products.map((product) => (
-        <link
-          key={product.name}
-          rel="preload"
-          as="image"
-          href={`/images/${product.name}.webp`}
-          type="image/webp"
-        />
-      ))}
+      <link
+        rel="preload"
+        as="image"
+        href={`/images/NeuroLens.webp`}
+        type="image/webp"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href={`/images/EchoSkin.webp`}
+        type="image/webp"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href={`/images/CoreDrive.webp`}
+        type="image/webp"
+      />
     </>
   );
 }
