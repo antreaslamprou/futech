@@ -41,8 +41,10 @@ export default function FeaturedProducts(){
                         ref={imageRef}
                         src={`/images/${currentProduct.name}.webp`} 
                         alt={currentProduct.name} 
-                        fill  
+                        fill
+                        sizes="(max-width: 1120px) 100vw, 1120px"
                         className="object-contain object-center absolute hidden"
+                        priority
                     />
                     <h2 
                         ref={titleRef}
