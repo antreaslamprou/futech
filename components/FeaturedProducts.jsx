@@ -13,6 +13,12 @@ export default function FeaturedProducts(){
     const imageRef = useRef(null);
     const nameRef = useRef(null);
     const titleRef = useRef(null);
+
+    const refs = [
+        {element: imageRef.current, animaton: "animate-fadeIn-scaleIn"},
+        {element: nameRef.current, animaton: "animate-slideIn-right"},
+        {element: titleRef.current, animaton: "animate-slideIn-left"},
+    ];
     
     useEffect(() => {
         (async () => {
@@ -22,22 +28,11 @@ export default function FeaturedProducts(){
         })();
     },[]);
 
-    useEffect(() => {
-        if (currentProduct) {
-            handleAnimation();
-        }
-    },[currentProduct]);
-
     if (!currentProduct) {
         return <FullPageLoader />;
     }
 
     function handleAnimation() {
-        const refs = [
-            {element: imageRef.current, animaton: "animate-fadeIn-scaleIn"},
-            {element: nameRef.current, animaton: "animate-slideIn-right"},
-            {element: titleRef.current, animaton: "animate-slideIn-left"},
-        ];
         refs.forEach(ref => {
             if (ref.element) {
                 ref.element.classList.remove("hidden");
@@ -46,6 +41,15 @@ export default function FeaturedProducts(){
                 ref.element.classList.add(ref.animaton);
             }
         });
+    }
+
+    function handleFilter(product) {
+        refs.forEach(ref => {
+            if (ref.element) {
+                ref.element.classList.add("hidden");
+            }
+        });
+        setCurrentProduct(product);
     }
 
     return (
@@ -60,6 +64,7 @@ export default function FeaturedProducts(){
                         fill
                         sizes="(max-width: 1120px) 100vw, 1120px"
                         className="object-contain object-center absolute hidden"
+                        onLoad={handleAnimation}
                         priority
                     />
                     <h2 
@@ -85,7 +90,7 @@ export default function FeaturedProducts(){
                     {products.map((product) => (
                         <button
                             key={product.name}
-                            onClick={() => setCurrentProduct(product)}
+                            onClick={() => handleFilter(product)}
                             className={`rounded-full px-4 z-3 ${
                                 currentProduct.name === product.name
                                     ? "text-black btn-sm"
