@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from "next/link";
 import FullPageLoader from "./FullPageLoader";
 
+
 export default function FeaturedProducts(){
     const [products, setProducts] = useState([]);
     const [currentProduct, setCurrentProduct] = useState(null);
@@ -13,12 +14,6 @@ export default function FeaturedProducts(){
     const imageRef = useRef(null);
     const nameRef = useRef(null);
     const titleRef = useRef(null);
-
-    const refs = [
-        {element: imageRef.current, animaton: "animate-fadeIn-scaleIn"},
-        {element: nameRef.current, animaton: "animate-slideIn-right"},
-        {element: titleRef.current, animaton: "animate-slideIn-left"},
-    ];
     
     useEffect(() => {
         (async () => {
@@ -27,12 +22,21 @@ export default function FeaturedProducts(){
             setCurrentProduct(productrs[0])
         })();
     },[]);
-
+    
     if (!currentProduct) {
         return <FullPageLoader />;
     }
 
+    function getRefs() {
+        return [
+            { element: imageRef.current, animaton: "animate-fadeIn-scaleIn" },
+            { element: nameRef.current, animaton: "animate-slideIn-right" },
+            { element: titleRef.current, animaton: "animate-slideIn-left" },
+        ];
+    }
+
     function handleAnimation() {
+        const refs = getRefs();
         refs.forEach(ref => {
             if (ref.element) {
                 ref.element.classList.remove("hidden");
@@ -44,6 +48,7 @@ export default function FeaturedProducts(){
     }
 
     function handleFilter(product) {
+        const refs = getRefs();
         refs.forEach(ref => {
             if (ref.element) {
                 ref.element.classList.add("hidden");
