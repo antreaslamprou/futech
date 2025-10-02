@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
-import { registerUser } from 'lib/api'
+import { addUser } from 'lib/api'
 import toast from 'react-hot-toast';
 import CustomInputField from './CustomInputField'
 import CustomSelectField from './CustomSelectField'
@@ -82,7 +82,7 @@ function SignUpForm() {
             return;
         }
 
-        const res = await registerUser(userData);
+        const res = await addUser(userData);
         
         if (res.ok) {
             toast.success("Account created!");
