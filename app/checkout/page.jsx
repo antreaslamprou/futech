@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem, changeQuantity, removeItem, clearBasket } from 'store/features/basketReducer';
 import ConfirmModal from '@/components/ConfirmModal';
-import Image from 'next/image';
 import Link from 'next/link';
+import BasketItem from '@/components/BasketItem';
 
 
 export default function Checkout() {
@@ -50,44 +50,13 @@ export default function Checkout() {
       <>
         <h3 className="mb-10 text-center md:text-start">Bellow you can see the items in your basket:</h3>
         { basket.map((item, index) => (
-          <div key={index} className="mb-7 px-10 py-5 border border-futech-white rounded-lg w-full flex flex-col md:flex-row items-center justify-between relative">
-            <Link 
-              className="flex flex-col md:flex-row items-center justify-between md:gap-5 lg:gap-20"
-              href={`products/${item.id}`}
-            >
-              <Image
-                src={`/images/${item.name}.webp`}
-                alt={item.name}
-                width={150}
-                height={150}
-                className="object-contain mr-5"
-                priority
-              />
-              <h3 className="my-5">{item.name}</h3>
-            </Link>
-            <div className="flex gap-5 items-center justify-center">
-              <button 
-                className="w-10 h-10 text-2xl rounded-full border-1 ps-1"
-                onClick={() => deductQuantity(item)}
-              >
-                -
-              </button>
-              <p className="text-2xl">x {item.quantity}</p>
-              <button 
-                className="w-10 h-10 text-2xl rounded-full border-1 ps-1"
-                onClick={() => addQuantity(item)}
-              >
-                +
-              </button>
-            </div>
-            <p className="text-2xl my-5">${item.price * item.quantity}</p>
-            <button 
-              className="absolute top-0 right-0 -m-3.5 bg-red-500 rounded-full w-10 h-10 non-hover"
-              onClick={() => removeProduct(item)}
-            >
-              <h2>X</h2>
-            </button>
-          </div>
+          <BasketItem 
+            key={index} 
+            product={item} 
+            add={() => deductQuantity(item)} 
+            deduct={() => removeProduct(item)} 
+            remove={() => removeProduct(item)} 
+          />
         ))}
         <h3 className="w-full pe-7 text-center md:text-end">Total: ${total}</h3>
       </>
