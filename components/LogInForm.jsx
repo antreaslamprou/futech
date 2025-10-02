@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from "next-auth/react";
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import CustomInputField from './CustomInputField'
 import AuthButtons from "./AuthButtons";
@@ -21,6 +22,7 @@ function LogInForm() {
         });
 
         if (res.ok) {
+            const router = useRouter();
             router.push("/account");
         } else {
             toast.error("Invalid email or password");

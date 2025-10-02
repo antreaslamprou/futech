@@ -97,7 +97,7 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   input, select {
-    @apply outline-gray-500/50 outline-1 p-5 rounded-xl leading-normal focus:outline-0 focus:ring-2 focus:ring-futech-white block w-full bg-futech-black appearance-none;
+    @apply outline-gray-500/50 outline-1 p-5 rounded-xl leading-normal focus:outline-0 focus:ring-2 focus:ring-futech-white block w-full bg-futech-black appearance-none disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   select {

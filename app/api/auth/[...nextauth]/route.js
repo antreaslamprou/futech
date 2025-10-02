@@ -3,11 +3,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import { getUserByEmail, createUser  } from "lib/db";
+import { getUserByEmail, createUser  } from "@/lib/db";
 import bcrypt from "bcryptjs";
 
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -34,10 +34,6 @@ const handler = NextAuth({
         return {
           id: user.id,
           email: user.email,
-          firstName: user.firstname,
-          lastName: user.lastname,
-          address: user.address,
-          country: user.country
         };
       },
     }),
@@ -72,17 +68,16 @@ const handler = NextAuth({
       let dbUser = await getUserByEmail(user.email);
 
       if (!dbUser) {
-        // Attempt to get user details from the provider's profile
         const firstName =
           profile?.given_name ||
           profile?.first_name ||
-          (profile?.name ? profile.name.split(" ")[0] : null) ||
-          "";
+          (profile?.name ? profile.name.split(" ")[0] : "") || "";
+
         const lastName =
           profile?.family_name ||
           profile?.last_name ||
-          (profile?.name ? profile.name.split(" ").slice(1).join(" ") : null) ||
-          "";
+          (profile?.name ? profile.name.split(" ").slice(1).join(" ") : "") || "";
+
         const address = profile?.location || null;
         const country = profile?.locale || null;
 
@@ -98,11 +93,6 @@ const handler = NextAuth({
       }
 
       user.id = dbUser.id;
-      user.firstName = dbUser.firstname;
-      user.lastName = dbUser.lastname;
-      user.address = dbUser.address;
-      user.country = dbUser.country;
-      user.password = dbUser.password;
       return true;
     },
     async jwt({ token, user }) {
@@ -117,13 +107,12 @@ const handler = NextAuth({
     },
     async session({ session, token }) {
       session.user.id = token.id;
-      session.user.firstName = token.firstName;
-      session.user.lastName = token.lastName;
-      session.user.address = token.address;
-      session.user.country = token.country;
+      session.email = token.email;
       return session;
     },
   }
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

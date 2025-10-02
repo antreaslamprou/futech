@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setUser } from 'store/features/currentUserReducer';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { signOut, update } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import { fetchCountryByCodeJSON, updateUser } from 'lib/api';
+import CustomSelectField from 'components/CustomSelectField'
 import Image from 'next/image';
 import FullPageLoader from 'components/FullPageLoader';
 import toast from 'react-hot-toast';
@@ -84,8 +85,7 @@ export default function Account() {
     try {
       const data  = await updateUser(user.email, formData)
       if (data.success) {
-        dispatch(setUser(formData)); 
-        await update(formData);
+        dispatch(setUser(formData));
         toast.success("User updated!");
       } else {
         toast.error(data.error || "Update failed");
@@ -119,15 +119,30 @@ export default function Account() {
     <h1 className="mb-10">Account</h1>
     {userDetails.map((item) => (
       <div key={item.key} className="w-full flex max-md:flex-col justify-center items-center my-4 md:gap-5">
-        <h5>{item.label}:</h5>
+        <h5 className={isEditing ? "md:w-35" : ""}>{item.label}:</h5>
         {isEditing ? (
-          <input
-            name={item.key}
-            value={formData[item.key] || ""}
-            onChange={handleChange}
-            placeholder="Please fill"
-            className="md:max-w-1/2"
-          />
+          item.key ===  "country" ? (
+            <CustomSelectField
+              name={item.key}
+              value={formData[item.key]}
+              onChange={(e) => {
+                setFormData({ ...formData, [item.key]: e.target.value });
+                handleChange(e);
+              }}
+              placeholder="Please select"
+              className="md:max-w-1/2"
+              disabled={item.key === "email"}
+            />
+          ) : (
+            <input
+              name={item.key}
+              value={formData[item.key] || ""}
+              onChange={handleChange}
+              placeholder="Please fill"
+              className="md:max-w-1/2"
+              disabled={item.key === "email"}
+            />
+          )
         ) : (
           <p className={(item.value) ? "" : "text-red-500"}>{item.value || "*Please update"}</p>
         )}

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { SessionProvider, useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { setUser, clearUser } from "store/features/currentUserReducer";
+import { getUser } from "lib/api";
 import { Toaster } from 'react-hot-toast';
 import ReduxProvider from 'store/providers/ReduxProvider';
 
@@ -13,15 +14,30 @@ function SessionSync({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (status === "authenticated") {
-      dispatch(setUser(session.user));
-    } else if (status === "unauthenticated") {
-      dispatch(clearUser());
+    async function fetchUser() {
+      try {
+        if (status === "authenticated") {
+          const data = await getUser();
+          if (data.success) {
+            dispatch(setUser(data.user));
+          } else {
+            dispatch(clearUser());
+          }
+        } else if (status === "unauthenticated") {
+          dispatch(clearUser());
+        }
+      } catch (err) {
+        console.error("Failed to fetch user:", err);
+        dispatch(clearUser());
+      }
     }
+
+    fetchUser();
   }, [session, status, dispatch]);
 
-  return children;
+    return children;
 }
+
 
 export default function ClientLayout({ children }) {
   return (

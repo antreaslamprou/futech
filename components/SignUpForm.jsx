@@ -9,8 +9,8 @@ import CustomSelectField from './CustomSelectField'
 
 
 function SignUpForm() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [firstName, setfirstName] = useState("");
+    const [lastName, setlastName] = useState("");
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [country, setCountry] = useState("");
@@ -102,14 +102,14 @@ function SignUpForm() {
                 type="text" 
                 value={firstName} 
                 label="First Name"
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => setfirstName(e.target.value)}
             />
             <CustomInputField 
                 id="lastName" 
                 type="text" 
                 value={lastName} 
                 label="Last Name"
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => setlastName(e.target.value)}
             />
         </div>
         <div className="form-control">
@@ -161,7 +161,6 @@ function SignUpForm() {
             />
             <CustomSelectField 
                 id="country" 
-                type="select" 
                 value={country} 
                 label="Country"
                 onChange={(e) => setCountry(e.target.value)}

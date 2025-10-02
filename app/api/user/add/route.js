@@ -1,4 +1,4 @@
-import { createUser, getUserByEmail } from "lib/db";
+import { createUser, getUserByEmail } from "@/lib/db";
 import bcrypt from "bcryptjs";
 
 export async function POST(req) {

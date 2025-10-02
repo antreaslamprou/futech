@@ -1,4 +1,4 @@
-import { getProducts } from 'lib/db';
+import { getProducts } from '@/lib/db';
 import { writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
 

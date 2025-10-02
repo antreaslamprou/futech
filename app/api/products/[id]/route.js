@@ -1,4 +1,4 @@
-import { getProduct } from "lib/db";
+import { getProduct } from "@/lib/db";
 
 
 export async function GET(req, {params}) {
