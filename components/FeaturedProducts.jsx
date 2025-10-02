@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from "react";
-import { fetchProducts } from 'lib/api';
+import { fetchProductsJSON } from 'lib/api';
 import Image from 'next/image';
 import Link from "next/link";
 import FullPageLoader from "./FullPageLoader";
@@ -14,14 +14,12 @@ export default function FeaturedProducts(){
     const nameRef = useRef(null);
     const titleRef = useRef(null);
     
-    
     useEffect(() => {
-        fetchProducts()
-        .then((prods) => {
-            setProducts(prods);
-            setCurrentProduct(prods[0]);
-        })
-        .catch(console.error);
+        (async () => {
+            const productrs = await fetchProductsJSON();
+            setProducts(productrs);
+            setCurrentProduct(productrs[0])
+        })();
     },[]);
 
     useEffect(() => {
@@ -33,7 +31,6 @@ export default function FeaturedProducts(){
     if (!currentProduct) {
         return <FullPageLoader />;
     }
-
 
     function handleAnimation() {
         const refs = [

@@ -3,10 +3,9 @@
 import { useParams } from 'next/navigation';
 import { notFound } from 'next/navigation';
 import { useState, useEffect } from 'react'
-import { fetchProductById } from 'lib/api'
+import { fetchProductByIdJSON } from 'lib/api'
 import Product from 'components/Product';
-import FullPageLoader from '@/components/FullPageLoader';
-
+import FullPageLoader from 'components/FullPageLoader';
 
 
 export default function ProductPage() {
@@ -16,25 +15,16 @@ export default function ProductPage() {
     const { id } = params;
 
     useEffect(() => {
-        async function loadProduct() {
-            try {
-                const fetchedProduct = await fetchProductById(id);
-                if (!fetchedProduct) {
-                    notFound(); 
-                } else {
-                    setProduct(fetchedProduct);
-                }
-            } catch (error) {
-                console.error("Failed to fetch product:", error);
-                notFound();
-            } finally {
+        (async () => {
+            const product = await fetchProductByIdJSON(id);
+            if (!product) {
+                notFound(); 
+            } else {
+                setProduct(product);
                 setLoading(false);
             }
-        }
-
-        if (id) loadProduct();
-
-    },[id])
+        })();
+    },[id]);
 
     if (loading) {
         return <FullPageLoader />

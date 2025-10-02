@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "NeuroLens",
+    "title": "Vision. Redefined.",
+    "price": 299,
+    "description": "See the world, and beyond. NeuroLens is the first smart contact lens engineered with immersive augmented vision. With built-in neural-sync and dynamic light adaptation, NeuroLens overlays real-time information, navigation, and biometric insights—seamlessly. No screens. No frames. Just vision."
+  },
+  {
+    "id": 3,
+    "name": "EchoSkin",
+    "title": "Move Smart. Stay Fresh.",
+    "price": 199,
+    "description": "Performance meets intelligence. EchoSkin is the first responsive thermal-regulating activewear. It detects your body’s needs and adjusts on the fly—cooling when you push harder, warming when you recover. Lightweight. Adaptive. Silent. EchoSkin doesn’t just fit your body—it understands it."
+  },
+  {
+    "id": 2,
+    "name": "CoreDrive",
+    "title": "Power. Unplugged.",
+    "price": 250,
+    "description": "Energy reimagined. CoreDrive is a compact power cell that delivers off-grid energy for years—no charging, no downtime. Built with nano-reactive alloys and zero-loss output, it powers everything from wearables to workspace systems. It's not a battery. It’s liberation."
+  }
+]

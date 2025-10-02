@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
+import { registerUser } from 'lib/api'
 import toast from 'react-hot-toast';
 import CustomInputField from './CustomInputField'
+import CustomSelectField from './CustomSelectField'
 
 
 function SignUpForm() {
@@ -19,50 +21,69 @@ function SignUpForm() {
 
     const router = useRouter();
 
+    const validations = [
+        {
+            valid: (v) => v.firstName.trim().length >= 3,
+            error: "Please enter a valid first name",
+        },
+        {
+            valid: (v) => v.lastName.trim().length >= 3,
+            error: "Please enter a valid last name",
+        },
+        {
+            valid: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email),
+            error: "Please enter a valid email",
+        },
+        {
+            valid: (v) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(v.password),
+            error: "Please enter a valid password",
+        },
+        {
+            valid: (v) => v.password === v.confirmPassword,
+            error: "Passwords do not match",
+        },
+        {
+            valid: (v) => v.address.trim().length >= 3,
+            error: "Please enter a valid address",
+        },
+        {
+            valid: (v) => v.country !== "",
+            error: "Please select your country",
+        },
+    ];
+
+    function validateForm(values) {
+        for (const rule of validations) {
+            if (!rule.valid(values)) {
+            return rule.error; // Return the first error
+            }
+        }
+        return null; // All validations passed
+    }
+
+
     async function handleSubmit(e) {
         e.preventDefault();
+
+        const userData = {
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            address,
+            country,
+        };
+
+        const error = validateForm(userData);
+
+        if (error) {
+            toast.error(error);
+            return;
+        }
+
+        const res = await registerUser(userData);
         
-        if (firstName.length < 3 ) {
-            toast.error("Please enter a valid first name");
-            return;
-        }
-
-        if (lastName.length < 3 ) {
-            toast.error("Please enter a valid last name");
-            return;
-        }
-
-        if (lastName.length < 3 ) {
-            toast.error("Please enter a valid last name");
-            return;
-        }
-
-        if (!email || !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
-            toast.error("Please enter a valid email");
-            return;
-        }
-
-        if (!password || !(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password))) {
-            toast.error("Please enter a valid password");
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            toast.error("Passwords do not match");
-            return;
-        }
-
-        if (country === "") {
-            toast.error("Please select your country");
-            return;
-        }
-
-        const res = await fetch("/api/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ firstName, lastName, email, password, address, country }),
-        });
-
         if (res.ok) {
             toast.success("Account created!");
             router.push("/login");
@@ -138,7 +159,7 @@ function SignUpForm() {
                 label="Address"
                 onChange={(e) => setAddress(e.target.value)}
             />
-            <CustomInputField 
+            <CustomSelectField 
                 id="country" 
                 type="select" 
                 value={country} 

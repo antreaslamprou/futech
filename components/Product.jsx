@@ -58,7 +58,7 @@ export default function Product(props) {
                 alt={props.product.name} 
                 width={500}
                 height={500}
-                className={`${imageOrder} animate-fadeIn ${imageAnimation}`} 
+                className={`${imageOrder} mx-auto animate-fadeIn ${imageAnimation}`} 
             />
             <div className={`order-1 animate-fadeIn ${textAnimation}`}>
                 <h1 className={textAlign}>{props.product.name}</h1>
