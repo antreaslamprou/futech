@@ -56,7 +56,7 @@ export default function Navbar() {
  
     return(
         <nav className="flex justify-between align-middle sticky top-0 z-10 bg-futech-black">
-            <Link href="/" className="my-auto z-15">
+            <Link href="/" className="my-auto z-15 non-hover">
                 <h3>FUTECH.</h3>
             </Link>
 
@@ -76,17 +76,17 @@ export default function Navbar() {
                     </Link>
                 )}
                 <button 
-                    className="block cursor-pointer group"
+                    className="block cursor-pointer group max-md:mt-3"
                     onClick={toggleMenu}
                 >
                     {[...Array(3)].map((_, index) => (
                         <div
                             key={index}
-                            className={`scale-75 md:scale-100 w-8 h-0.5 md:h-0.75  bg-white my-2 rounded-full transition-['rotate,translate'] duration-300 ${index === 1 && 'group-hover:translate-x-2'} ${
+                            className={`scale-75 md:scale-100 w-8 h-0.75 my-1.5 md:my-2 bg-white rounded-full transition-['rotate,translate'] duration-300 ${index === 1 && 'group-hover:translate-x-2'} ${
                                 isOpen ? 
                                     index === 0 ? 'rotate-45 translate-y-2 md:translate-y-2.5' :
                                     index === 1 ? 'opacity-0' :
-                                    '-rotate-45 -translate-y-3' 
+                                    '-rotate-45 -translate-y-2.5  md:-translate-y-3' 
                                 : ''
                             }`}
                         />

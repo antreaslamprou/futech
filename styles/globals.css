@@ -108,6 +108,10 @@ html::-webkit-scrollbar-thumb:hover {
     @apply cursor-pointer w-max disabled:cursor-not-allowed disabled:opacity-50;
   }
 
+  button:not(:disabled):not(.non-hover), a:not(.non-hover) {
+    @apply lg:hover:opacity-90;
+  }
+
   .auth-buttons {
     @apply flex flex-col md:flex-row gap-4 mx-auto;
   }

@@ -74,7 +74,7 @@ export default function Product(props) {
                 ) : props.button === 'Buy' ? (
                     <>
                         <div className={`Link mt-8 flex justify-center relative ${buttonAlign}`}>
-                            <button className={`btn transition-opacity duration-300 ${isAdded ? "opacity-0" : "opacity-100"}`} onClick={addToCart}>Buy Now</button>
+                            <button className={`btn transition-opacity duration-300 ${isAdded ? "opacity-0" : ""}`} onClick={addToCart}>Buy Now</button>
                         
                             { isAdded &&
                                 <div className="flex gap-5 items-center justify-center absolute mt-2">

@@ -1,12 +1,16 @@
 'use client'; 
 
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, changeQuantity, removeItem } from 'store/features/basketReducer';
+import { addItem, changeQuantity, removeItem, clearBasket } from 'store/features/basketReducer';
+import ConfirmModal from '@/components/ConfirmModal';
 import Image from 'next/image';
 import Link from 'next/link';
 
 
 export default function Checkout() {
+  const [showModal, setShowModal] = useState(false);
+
   const user = useSelector((state) => state.currentUser.user);
   const basket = useSelector((state) => state.basket.basket);
 
@@ -26,6 +30,20 @@ export default function Checkout() {
     dispatch(removeItem(product));
   }
 
+  function handleCheckout() {
+    setShowModal(true);
+  }
+
+  function confirmCheckout() {
+    setShowModal(false);
+    checkout();
+  }
+
+  function checkout() {
+    console.table(basket);
+    //clearBasket();
+  }
+  
   return (<>
     <h1 className="mb-10">Checkout</h1>
     { basket.length > 0 ? (
@@ -43,6 +61,7 @@ export default function Checkout() {
                 width={150}
                 height={150}
                 className="object-contain mr-5"
+                priority
               />
               <h3 className="my-5">{item.name}</h3>
             </Link>
@@ -63,7 +82,7 @@ export default function Checkout() {
             </div>
             <p className="text-2xl my-5">${item.price * item.quantity}</p>
             <button 
-              className="absolute top-0 right-0 -m-3.5 bg-red-500 rounded-full w-10 h-10"
+              className="absolute top-0 right-0 -m-3.5 bg-red-500 rounded-full w-10 h-10 non-hover"
               onClick={() => removeProduct(item)}
             >
               <h2>X</h2>
@@ -88,12 +107,20 @@ export default function Checkout() {
         <button 
           className="btn-lg mt-10 md:mt-20 mx-auto"
           disabled={!(basket.length > 0 && user != null)}
+          onClick={handleCheckout}
         >
           Checkout
         </button>
         { user == null && 
-          <p className="mt-5 text-red-500 text-center">You need to be logged in to checkout. Go to <Link className="text-red-500 underline underline-offset-5" href="/login">Log In</Link>.</p> 
+          <p className="mt-5 text-red-500 text-center">You need to be logged in to checkout. Go to <Link className="text-red-500 underline underline-offset-5 non-hover" href="/login">Log In</Link>.</p> 
         }
+        <ConfirmModal
+          isOpen={showModal}
+          title="Confirm Checkout"
+          message="Are you sure you want to proceed with the checkout?"
+          onConfirm={confirmCheckout}
+          onCancel={() => setShowModal(false)}
+        />
       </>
     }
   </>);

@@ -51,7 +51,7 @@ export default function FeaturedProducts(){
     return (
         <div className="w-full h-full flex flex-col items-center justify-center featured-products"
         >
-            <Link href={`/products/${currentProduct.id}`} className="w-full h-full">
+            <Link href={`/products/${currentProduct.id}`} className="w-full h-full non-hover">
                 <div className="text-center relative w-full h-full flex-1 flex flex-col justify-center overflow-hidden">
                     <Image 
                         ref={imageRef}

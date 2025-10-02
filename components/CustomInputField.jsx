@@ -35,7 +35,7 @@ export default function InputField({ id, label, type = "text", value, className,
                 <button
                     type="button"
                     onClick={() => setShowPassword((prev) => !prev)}
-                    className="absolute right-5 top-6"
+                    className="absolute right-5 top-6 non-hover"
                     tabIndex="-1"
                 >
                     <Image

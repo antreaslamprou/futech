@@ -158,7 +158,7 @@ export default function Account() {
             Cancel
           </button>
           <button 
-            className="btn-lg bg-green-500"
+            className="btn-lg bg-green-600"
             onClick={saveEdit}
             disabled={!areDataChanged}
           >
