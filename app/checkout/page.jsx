@@ -53,8 +53,8 @@ export default function Checkout() {
           <BasketItem 
             key={index} 
             product={item} 
-            add={() => deductQuantity(item)} 
-            deduct={() => removeProduct(item)} 
+            add={() => addQuantity(item)} 
+            deduct={() => deductQuantity(item)} 
             remove={() => removeProduct(item)} 
           />
         ))}

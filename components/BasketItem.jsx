@@ -13,28 +13,28 @@ export default function BasketItem(props) {
             href={`products/${product.id}`}
         >
             <Image
-            src={`/images/${product.name}.webp`}
-            alt={product.name}
-            width={150}
-            height={150}
-            className="object-contain mr-5"
-            priority
+                src={`/images/${product.name}.webp`}
+                alt={product.name}
+                width={150}
+                height={150}
+                className="object-contain mr-5"
+                priority
             />
             <h3 className="my-5">{product.name}</h3>
         </Link>
         <div className="flex gap-5 items-center justify-center">
             <button 
-            className="w-10 h-10 text-2xl rounded-full border-1 ps-1"
-            onClick={deduct}
+                className="w-10 h-10 text-2xl rounded-full border-1 ps-1"
+                onClick={deduct}
             >
-            -
+                -
             </button>
             <p className="text-2xl">x {product.quantity}</p>
             <button 
-            className="w-10 h-10 text-2xl rounded-full border-1 ps-1"
-            onClick={add}
+                className="w-10 h-10 text-2xl rounded-full border-1 ps-1"
+                onClick={add}
             >
-            +
+                +
             </button>
         </div>
         <p className="text-2xl my-5">${product.price * product.quantity}</p>
