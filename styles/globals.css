@@ -153,7 +153,7 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .nav-item {
-    @apply mx-3 px-8 py-4 outline-gray-500/50 outline-1 rounded-4xl hover:outline-gray-500 text-xl md:text-2xl lg:text-3xl bg-[url('/images/BlackAnimation.gif')] bg-no-repeat bg-cover bg-fixed;
+    @apply mx-3 px-8 py-4 outline-gray-500/50 outline-1 rounded-4xl hover:outline-gray-500 text-xl md:text-2xl lg:text-3xl;
   }
 
   .nav-links.hide .nav-item {

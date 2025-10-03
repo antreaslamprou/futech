@@ -93,19 +93,30 @@ export default function Navbar() {
                     ))}
                 </button>
             </div>
-            
-            
+                        
             <div className={`nav-links py-25 px-15 md:px-20 lg:px-25 absolute h-screen w-screen start-0 top-0 z-10 bg-black transition-opacity duration-250 grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-10 xl:gap-20 overflow-hidden
-            ${ isOpen ? 'visible opacity-100' : 'hide opacity-0'} ${!isClickable && 'scale-0'}`}>
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.path}
-                            href={item.path}
-                            className={`nav-item h-full mx-0 flex items-center justify-center uppercase tracking-wider ${pathname === item.path && "active"}`}
-                            >
-                                {item.name}
-                        </Link>
-                    ))}
+                ${ isOpen ? 'visible opacity-100' : 'hide opacity-0'} ${!isClickable && 'scale-0'}`}>
+                {navItems.map((item) => (
+                <>
+                    <Link
+                        key={item.path}
+                        href={item.path}
+                        className={`nav-item relative overflow-hidden z-15 h-full mx-0 flex items-center justify-center uppercase tracking-wider ${pathname === item.path && "active"}`}
+                        >
+                            <video
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                className="absolute w-full h-full object-cover brightness-50 -z-10"
+                                >
+                                <source src="/videos/BlackBackground.webm" type="video/webm" />
+                                <source src="/videos/BlackBackground.mp4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                            {item.name}
+                    </Link>
+                </>))}
             </div>
         </nav>
     )
