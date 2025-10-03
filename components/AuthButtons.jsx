@@ -10,14 +10,20 @@ export default function AuthButtons() {
   ];
 
   function isMobile() {
-    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (typeof window === 'undefined') return false;
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
-  function onProviderClick(providerName){
+  async function onProviderClick(providerName){
     if (isMobile()) {
-      (async () => {
-        await signIn(providerName, { callbackUrl: "/account" });
-      })();
+      try {
+        await signIn(providerName, { 
+          callbackUrl: "/account",
+          redirect: true 
+        });
+      } catch (error) {
+        console.error('Sign in error:', error);
+      }
     } else {
       const width = 500;
       const height = 600;
