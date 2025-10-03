@@ -1,7 +1,7 @@
 import { getProduct } from "@/lib/db";
 
 
-export async function GET(req, {params}) {
+export async function GET(req, { params }) {
   const { id } = await params;
 
   try {
