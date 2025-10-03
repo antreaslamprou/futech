@@ -11,6 +11,7 @@ import AuthButtons from "./AuthButtons";
 function LogInForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const router = useRouter();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -22,7 +23,6 @@ function LogInForm() {
         });
 
         if (res.ok) {
-            const router = useRouter();
             router.push("/account");
         } else {
             toast.error("Invalid email or password");

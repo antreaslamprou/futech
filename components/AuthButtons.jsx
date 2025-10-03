@@ -15,8 +15,9 @@ export default function AuthButtons() {
 
   function onProviderClick(providerName){
     if (isMobile()) {
-      window.location.href = url;
-      return;
+      (async () => {
+        await signIn(providerName, { callbackUrl: "/account" });
+      })();
     } else {
       const width = 500;
       const height = 600;
