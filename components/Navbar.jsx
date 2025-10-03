@@ -101,19 +101,9 @@ export default function Navbar() {
                     <Link
                         key={item.path}
                         href={item.path}
-                        className={`nav-item relative overflow-hidden z-15 h-full mx-0 flex items-center justify-center uppercase tracking-wider ${pathname === item.path && "active"}`}
+                        className={`nav-item relative overflow-hidden z-15 h-full mx-0 flex items-center justify-center uppercase tracking-wider bg-[url('/images/BlackBackground.gif')] bg-cover
+                            ${pathname === item.path && "active"}`}
                         >
-                            <video
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
-                                className="absolute w-full h-full object-cover brightness-50 -z-10"
-                                >
-                                <source src="/videos/BlackBackground.webm" type="video/webm" />
-                                <source src="/videos/BlackBackground.mp4" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
                             {item.name}
                     </Link>
                 </>))}
