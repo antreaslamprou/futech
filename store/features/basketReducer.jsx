@@ -11,15 +11,17 @@ export const basketReducer = createSlice({
         const existingItem = state.basket.find(item => item.id === action.payload.id);
         if (existingItem) {
             existingItem.quantity += 1;
+            existingItem.totalPrice = existingItem.quantity * existingItem.price;
         } else {
-            state.basket.push({ ...action.payload, quantity: 1 });
+            state.basket.push({ ...action.payload, quantity: 1, totalPrice: action.payload.price  });
         }
     },
     changeQuantity: (state, action) => {
         const { id, quantity } = action.payload;
         const item = state.basket.find(item => item.id === id);
         if (item && quantity > 1) {
-            item.quantity = quantity - 1;
+            item.quantity -= 1;
+            item.totalPrice = quantity * item.price;
         } else if (item && quantity === 1) {
             state.basket = state.basket.filter(item => item.id !== id);
         }
@@ -28,12 +30,12 @@ export const basketReducer = createSlice({
         state.basket = state.basket.filter(item => item.id !== action.payload.id);
     },
     clearBasket: (state) => {
-        state.user = [];
+        state.basket = [];
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addItem, changeQuantity, removeItem, clearBasket} = basketReducer.actions
+export const { addItem, changeQuantity, removeItem, clearBasket} = basketReducer.actions;
 
-export default basketReducer.reducer
+export default basketReducer.reducer;

@@ -136,6 +136,10 @@ html::-webkit-scrollbar-thumb:hover {
     @apply px-10 md:px-16 md:py-5 text-2xl;
   }
 
+  .account-content {
+    @apply w-full h-full flex flex-col justify-start md:py-5;
+  }
+
   nav {
     @apply flex justify-between p-5;
   }

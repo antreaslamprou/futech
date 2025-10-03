@@ -6,6 +6,8 @@ import { addItem, changeQuantity, removeItem, clearBasket } from 'store/features
 import ConfirmModal from '@/components/ConfirmModal';
 import Link from 'next/link';
 import BasketItem from '@/components/BasketItem';
+import { checkoutBasket } from '@/lib/api';
+import toast from 'react-hot-toast';
 
 
 export default function Checkout() {
@@ -40,8 +42,15 @@ export default function Checkout() {
   }
 
   function checkout() {
-    console.table(basket);
-    //clearBasket();
+    checkoutBasket(basket, user)
+      .then((data) => {
+        toast.success(`Order successful! Order ID: ${data.orderId}`);
+        dispatch(clearBasket());
+      })
+      .catch((error) => {
+        toast.error("Checkout failed");
+        console.error("Checkout failed:", error);
+      });
   }
   
   return (<>
@@ -62,7 +71,7 @@ export default function Checkout() {
       </>
     ) : (
       <>
-        <h3>Your Basket is empty</h3>
+        <h3>Basket is empty</h3>
         <Link 
           href="/products"
           className="mt-15 btn-lg"
@@ -75,12 +84,12 @@ export default function Checkout() {
       <>
         <button 
           className="btn-lg mt-10 md:mt-20 mx-auto"
-          disabled={!(basket.length > 0 && user != null)}
+          disabled={!user}
           onClick={handleCheckout}
         >
           Checkout
         </button>
-        { user == null && 
+        { !user && 
           <p className="mt-5 text-red-500 text-center">You need to be logged in to checkout. Go to <Link className="text-red-500 underline underline-offset-5 non-hover" href="/login">Log In</Link>.</p> 
         }
         <ConfirmModal

@@ -10,7 +10,7 @@ export default function BasketItem(props) {
     <div className="mb-7 px-10 py-5 border border-futech-white rounded-lg w-full flex flex-col md:flex-row items-center justify-between relative">
         <Link 
             className="flex flex-col md:flex-row items-center justify-between md:gap-5 lg:gap-20"
-            href={`products/${product.id}`}
+            href={`/products/${product.id}`}
         >
             <Image
                 src={`/images/${product.name}.webp`}
@@ -37,7 +37,7 @@ export default function BasketItem(props) {
                 +
             </button>
         </div>
-        <p className="text-2xl my-5">${product.price * product.quantity}</p>
+        <p className="text-2xl my-5">${product.totalPrice}</p>
         <button 
             className="absolute top-0 right-0 -m-3.5 bg-red-500 rounded-full w-10 h-10 non-hover"
             onClick={remove}
@@ -46,5 +46,4 @@ export default function BasketItem(props) {
         </button>
     </div>
     )
-
 }

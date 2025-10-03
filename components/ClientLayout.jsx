@@ -14,7 +14,7 @@ function SessionSync({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function fetchUser() {
+    (async () => {
       try {
         if (status === "authenticated") {
           const data = await getUser();
@@ -30,12 +30,10 @@ function SessionSync({ children }) {
         console.error("Failed to fetch user:", err);
         dispatch(clearUser());
       }
-    }
-
-    fetchUser();
+    })();
   }, [session, status, dispatch]);
 
-    return children;
+  return children;
 }
 
 
