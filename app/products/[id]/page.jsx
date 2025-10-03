@@ -2,39 +2,24 @@
 
 import { useParams } from 'next/navigation';
 import { notFound } from 'next/navigation';
+import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { fetchProductByIdJSON } from 'lib/api'
 import Product from 'components/Product';
-import FullPageLoader from 'components/FullPageLoader';
 
 
 export default function ProductPage() {
-    const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const products = useSelector((state) => state.products.products);
     const params = useParams();
     const { id } = params;
+    const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        (async () => {
-            const product = await fetchProductByIdJSON(id);
-            if (!product) {
-                notFound(); 
-            } else {
-                setProduct(product);
-                setLoading(false);
-            }
-        })();
-    },[id]);
+        const currentProduct = products.find((item) => item.id ===  Number(id))
+        if (currentProduct) setProduct(currentProduct);
+        else return notFound();
+    },[])
+    
+    if (product === null) return;
 
-    if (loading) {
-        return <FullPageLoader />
-    }
-
-    if (!product) {
-        notFound();
-    }
-
-    return (<div className=''>
-        <Product product={product} button={"Buy"} />
-    </div>);
+    return (<Product product={product} button={"Buy"} />);
 }

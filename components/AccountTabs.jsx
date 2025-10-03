@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { fetchOrders } from '@/lib/api';
+import { fetchOrders, fetchOrderItems, fetchCountryByCodeJSON } from '@/lib/api';
 import ProfileTab from './ProfileTab';
 import OrdersTab from './OrdersTab';
 import SettingsTab from './SettingsTab';
@@ -16,6 +16,18 @@ export default function AccountTabs() {
         { key: 'settings', label: 'Settings' },
     ];
 
+    // For Profile tab
+    const [userCountry, setUserCountry] = useState("");
+    useEffect(() => {
+        (async () => {
+            const countryCode = user?.country;
+            if (countryCode) {
+                const country = await fetchCountryByCodeJSON(countryCode);
+                setUserCountry(`${countryCode} | ${country}`)
+            }
+        })();
+    }, []);
+
     // For Orders tab
     const user = useSelector((state) => state.currentUser.user);
     const [orders, setOrders] = useState(null);
@@ -26,9 +38,25 @@ export default function AccountTabs() {
         })();
     },[])
 
+    // For Orders > Orders List 
+    const [orderItemsMap, setOrderItemsMap] = useState({});
+    useEffect(() => {
+        if (!orders) return;
+        
+        const fetchAllOrderItems = async () => {
+            const itemsMap = {};
+            for (const order of orders) {
+                const items = await fetchOrderItems(order.id);
+                itemsMap[order.id] = items;
+            }
+            setOrderItemsMap(itemsMap);
+        };
+        
+        fetchAllOrderItems();
+    }, [orders]);
+
     return (
         <div className="flex flex-col w-full h-full mx-auto mt-10">
-            {/* Tab Header */}
             <div className="flex justify-center">
                 {tabs.map((tab) => (
                 <button
@@ -46,11 +74,9 @@ export default function AccountTabs() {
                 ))}
             </div>
             <hr className="h-1 mb-6 -mt-3 text-gray-700" />
-
-            {/* Tab Content */}
             <div className="flex h-full w-full items-center justify-center">
-                {activeTab === 'profile' && <ProfileTab />}
-                {activeTab === 'orders' && <OrdersTab orders={orders} />}
+                {activeTab === 'profile' && <ProfileTab country={userCountry} />}
+                {activeTab === 'orders' && <OrdersTab orders={orders} orderItemsMap={orderItemsMap} />}
                 {activeTab === 'settings' && <SettingsTab />}
             </div>
         </div>

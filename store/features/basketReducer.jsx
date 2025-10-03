@@ -35,7 +35,6 @@ export const basketReducer = createSlice({
   },
 })
 
-// Action creators are generated for each case reducer function
 export const { addItem, changeQuantity, removeItem, clearBasket} = basketReducer.actions;
 
 export default basketReducer.reducer;

@@ -1,32 +1,19 @@
 'use client';
 
-import { useState, useRef, useEffect } from "react";
-import { fetchProductsJSON } from 'lib/api';
+import { useState, useRef } from "react";
+import { useSelector } from 'react-redux'
 import Image from 'next/image';
 import Link from "next/link";
-import FullPageLoader from "./FullPageLoader";
 
 
 export default function FeaturedProducts(){
-    const [products, setProducts] = useState([]);
-    const [currentProduct, setCurrentProduct] = useState(null);
+    const products = useSelector((state) => state.products.products);
+    const [currentProduct, setCurrentProduct] = useState(products[0]);
 
     const imageRef = useRef(null);
     const nameRef = useRef(null);
     const titleRef = useRef(null);
     
-    useEffect(() => {
-        (async () => {
-            const productrs = await fetchProductsJSON();
-            setProducts(productrs);
-            setCurrentProduct(productrs[0])
-        })();
-    },[]);
-    
-    if (!currentProduct) {
-        return <FullPageLoader />;
-    }
-
     function getRefs() {
         return [
             { element: imageRef.current, animaton: "animate-fadeIn-scaleIn" },

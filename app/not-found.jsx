@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function PageNotFound() {
     return (<>
         <Image 
-            className="aspect-square h-20 md:h-30 lg:h-40 mx-auto mb-5" 
+            className="size-20 md:size-30 lg:size-40 mx-auto mb-5" 
             src="/images/Error.gif"
             width={160}
             height={160}

@@ -1,12 +1,14 @@
 'use client';
 
-import { useEffect } from "react";
-import { SessionProvider, useSession } from "next-auth/react";
-import { useDispatch } from "react-redux";
-import { setUser, clearUser } from "store/features/currentUserReducer";
-import { getUser } from "lib/api";
+import { useState, useEffect } from 'react';
+import { SessionProvider, useSession } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
+import { setUser, clearUser } from 'store/features/currentUserReducer';
+import { addProducts } from 'store/features/productsReducer';
+import { getUser, fetchProductsJSON } from '@/lib/api';
 import { Toaster } from 'react-hot-toast';
 import ReduxProvider from 'store/providers/ReduxProvider';
+import FullPageLoader from './FullPageLoader';
 
 
 function SessionSync({ children }) {
@@ -36,15 +38,34 @@ function SessionSync({ children }) {
   return children;
 }
 
+function GetProducts({children}) {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const products = await fetchProductsJSON();
+      dispatch(addProducts(products));
+      setIsLoading(false);
+    })();
+  }, [dispatch]);
+
+  if (isLoading) return <FullPageLoader />
+
+  return children;
+}
+
 
 export default function ClientLayout({ children }) {
   return (
     <ReduxProvider>
       <SessionProvider>
         <SessionSync>
-          <Toaster position="top-center" reverseOrder={false} />
-          {children}
-        </SessionSync>
+          <GetProducts>
+            <Toaster position="top-center" reverseOrder={false} />
+            {children}
+          </GetProducts>
+        </SessionSync>        
       </SessionProvider>
     </ReduxProvider>
   );

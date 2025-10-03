@@ -4,10 +4,10 @@ import { getOrderItems } from "@/lib/db";
 export async function GET(req, { params }) {
   try {
     const { id } = await params;
-    const orders = await getOrderItems(id);
+    const orderItems = await getOrderItems(id);
 
     return new Response(
-      JSON.stringify({ success: true, orders }),
+      JSON.stringify({ success: true, orderItems }),
       { status: 200 }
     );
   } catch (error) {

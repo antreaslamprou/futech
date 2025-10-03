@@ -61,7 +61,7 @@ export default function Navbar() {
             </Link>
 
             <div className="z-20 flex gap-6">
-                { basket?.length && (
+                { totalItems > 0 && (
                     <Link href="/checkout" className="animate-scaleInOut">
                         <div className="relative">
                             <Image 

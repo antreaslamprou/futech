@@ -1,23 +1,10 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import { fetchProductsJSON } from 'lib/api';
-import Product from "components/Product";
-import FullPageLoader from "components/FullPageLoader";
+import { useSelector } from 'react-redux'
+import Product from 'components/Product';
 
 export default function Products() {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        (async () => {
-            const productrs = await fetchProductsJSON();
-            setProducts(productrs);
-            setLoading(false);
-        })();
-    },[]);
-
-    if (loading) return <FullPageLoader />
+    const products = useSelector((state) => state.products.products);
 
     return (
     <div className="products-grid">
