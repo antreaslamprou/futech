@@ -1,7 +1,6 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { notFound } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import Product from 'components/Product';
@@ -22,4 +21,5 @@ export default function ProductPage() {
     if (product === null) return;
 
     return (<Product product={product} button={"Buy"} />);
+
 }
