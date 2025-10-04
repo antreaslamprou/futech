@@ -55,10 +55,10 @@ function SignUpForm() {
     function validateForm(values) {
         for (const rule of validations) {
             if (!rule.valid(values)) {
-            return rule.error; // Return the first error
+            return rule.error; 
             }
         }
-        return null; // All validations passed
+        return null; 
     }
 
 

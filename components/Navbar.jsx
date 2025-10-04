@@ -97,7 +97,6 @@ export default function Navbar() {
             <div className={`nav-links py-25 px-15 md:px-20 lg:px-25 absolute h-screen w-screen start-0 top-0 z-10 bg-black transition-opacity duration-250 grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-10 xl:gap-20 overflow-hidden
                 ${ isOpen ? 'visible opacity-100' : 'hide opacity-0'} ${!isClickable && 'scale-0'}`}>
                 {navItems.map((item) => (
-                <>
                     <Link
                         key={item.path}
                         href={item.path}
@@ -106,7 +105,7 @@ export default function Navbar() {
                         >
                             {item.name}
                     </Link>
-                </>))}
+                ))}
             </div>
         </nav>
     )

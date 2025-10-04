@@ -64,7 +64,7 @@ export default function SettingsTab() {
             console.error(err);
             toast.error("Unexpected error during update");
         } finally {
-            areDataChanged(false);
+            setAreDataChanged(false);
         }
     }
 

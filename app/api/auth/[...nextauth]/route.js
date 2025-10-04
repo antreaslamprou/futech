@@ -62,7 +62,7 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   callbacks: {
-     async signIn({ user, account, profile }) {
+    async signIn({ user, account, profile }) {
       if (!user?.email) return false;
 
       let dbUser = await getUserByEmail(user.email);
@@ -98,10 +98,7 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.firstName = user.firstName;
-        token.lastName = user.lastName;
-        token.address = user.address;
-        token.country = user.country;
+        token.email = user.email;
       }
       return token;
     },
