@@ -4,8 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 
-export default function BasketItem(props) {
-    const {product, add, deduct, remove} = props;
+export default function BasketItem({product, add, deduct, remove}) {
     return(
     <div className="mb-7 px-10 py-5 border border-futech-white rounded-lg w-full flex flex-col md:flex-row items-center justify-between relative">
         <Link 
