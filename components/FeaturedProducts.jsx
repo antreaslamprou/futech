@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { useSelector } from 'react-redux'
+import { formatStringToDashCase } from "@/utils/formatters";
 import Image from 'next/image';
 import Link from "next/link";
 
@@ -51,7 +52,7 @@ export default function FeaturedProducts(){
                 <div className="text-center relative w-full h-full flex-1 flex flex-col justify-center overflow-hidden">
                     <Image 
                         ref={imageRef}
-                        src={`/images/${currentProduct.name}.webp`} 
+                        src={`/images/${formatStringToDashCase(currentProduct.name)}.webp`} 
                         alt={currentProduct.name} 
                         fill
                         sizes="(max-width: 1120px) 100vw, 1120px"

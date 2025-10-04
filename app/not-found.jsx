@@ -7,7 +7,7 @@ export default function PageNotFound() {
     return (<>
         <Image 
             className="size-20 md:size-30 lg:size-40 mx-auto mb-5" 
-            src="/images/Error.gif"
+            src="/images/error.gif"
             width={160}
             height={160}
             alt="Error Icon"

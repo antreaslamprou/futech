@@ -17,14 +17,14 @@ export default function RootLayout({ children }) {
       <Head>
         <link
           rel="preload"
-          href="/fonts/Timeburner.ttf"
+          href="/fonts/timeburner.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/Ballega.otf"
+          href="/fonts/ballega.otf"
           as="font"
           type="font/otf"
           crossOrigin="anonymous"

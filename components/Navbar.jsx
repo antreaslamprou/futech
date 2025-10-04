@@ -100,7 +100,7 @@ export default function Navbar() {
                     <Link
                         key={item.path}
                         href={item.path}
-                        className={`nav-item relative overflow-hidden z-15 h-full mx-0 flex items-center justify-center uppercase tracking-wider bg-[url('/images/BlackBackground.gif')] bg-cover
+                        className={`nav-item relative overflow-hidden z-15 h-full mx-0 flex items-center justify-center uppercase tracking-wider bg-[url('/images/black-background.gif')] bg-cover
                             ${pathname === item.path && "active"}`}
                         >
                             {item.name}
