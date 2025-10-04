@@ -24,8 +24,8 @@ export default function OrdersTab({ orders, orderItemsMap }) {
                             <div className="text-center md:text-start">
                                 <p>Order #{order.id}</p>
                                 <p>Total: ${order.total}</p>
-                                <p>Date: {formatDate(order.order_date)}</p>
-                                <p>Time: {formatTime(order.order_date)}</p>
+                                <p>Date: {formatDate(order.orderDate)}</p>
+                                <p>Time: {formatTime(order.orderDate)}</p>
                             </div>
                             <div className={`overflow-hidden transition-opacity duration-300 
                                 ${expandedOrderId === order.id ? "opacity-100 p-5" : "max-h-0 opacity-0"}`}>

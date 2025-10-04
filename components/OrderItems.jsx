@@ -11,7 +11,7 @@ export default function OrderItems({ orderItems }){
     const enrichedOrderItems = useMemo(() => {
         return orderItems.map(orderItem => {
             const fullProduct = products.find(product => 
-                product.id === orderItem.product_id
+                product.id === orderItem.productId
             );
             return fullProduct ? { ...orderItem, ...fullProduct } : orderItem;
         });
