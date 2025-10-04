@@ -1,8 +1,10 @@
 @import "tailwindcss";
 @import "./animations.css";
-@import "./fonts.css";
+
 
 @theme {
+  --font-ballega: var(--font-ballega);
+  --font-timeburner: var(--font-timeburner);
   --color-futech-black: #0f1114;
   --color-futech-white: #ffff;
 }
