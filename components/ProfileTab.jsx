@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-
-import { formatKey } from '@/utils/formatters';
+import { formatKey, formatDate } from '@/utils/formatters';
 
 
 export default function ProfileTab({ country }) {
@@ -22,6 +21,10 @@ export default function ProfileTab({ country }) {
                     <p className={(value) ? "break-all text-end" : "text-red-500"}>{value || "*Please update"}</p>
                 </div> 
             ))}
+            <div className="w-full flex justify-between items-center my-4 md:gap-5">
+                <h5 className="me-5">Member Since:</h5>
+                <p className="text-end">{formatDate(user.createdAt)}</p>
+            </div> 
         </div>
     );
 }
