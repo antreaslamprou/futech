@@ -12,7 +12,7 @@ import FullPageLoader from './FullPageLoader';
 
 
 function SessionSync({ children }) {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function SessionSync({ children }) {
         dispatch(clearUser());
       }
     })();
-  }, [session, status, dispatch]);
+  }, [status, dispatch]);
 
   return children;
 }

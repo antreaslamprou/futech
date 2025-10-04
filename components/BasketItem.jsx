@@ -1,5 +1,6 @@
 'use client';
 
+import { formatStringToDashCase } from '@/utils/formatters';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,7 +13,7 @@ export default function BasketItem({product, add, deduct, remove}) {
             href={`/products/${product.id}`}
         >
             <Image
-                src={`/images/${product.name}.webp`}
+                src={`/images/${formatStringToDashCase(product.name)}.webp`}
                 alt={product.name}
                 width={150}
                 height={150}
