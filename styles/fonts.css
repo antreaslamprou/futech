@@ -1,11 +1,11 @@
 @theme {
-  --font-ballega: "ballega";
-  --font-timeburner: "timeburner";
+  --font-ballega: "Ballega";
+  --font-timeburner: "Timeburner";
 }
 
 @layer base {
   @font-face {
-    font-family: "timeburner";
+    font-family: "Timeburner";
     src: url("/fonts/timeburner.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
@@ -13,7 +13,7 @@
   }
 
   @font-face {
-    font-family: "ballega";
+    font-family: "Ballega";
     src: url("/fonts/ballega.otf") format("opentype");
     font-weight: 400;
     font-style: normal;

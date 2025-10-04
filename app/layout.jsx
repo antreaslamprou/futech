@@ -32,19 +32,25 @@ export default function RootLayout({ children }) {
         <link
           rel="preload"
           as="image"
-          href="/images/NeuroLens.webp"
+          href="/images/black-background.gif"
+          type="image/gif"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/neuro-lens.webp"
           type="image/webp"
         />
         <link
           rel="preload"
           as="image"
-          href="/images/EchoSkin.webp"
+          href="/images/echo-skin.webp"
           type="image/webp"
         />
         <link
           rel="preload"
           as="image"
-          href="/images/CoreDrive.webp"
+          href="/images/core-drive.webp"
           type="image/webp"
         />
       </Head>
