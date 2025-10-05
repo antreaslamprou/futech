@@ -6,8 +6,8 @@ export function EmailHeader() {
       <Img 
         src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/futech.webp`} 
         alt="FUTECH" 
-        width="200" 
-        height="60" 
+        width="290" 
+        height="110" 
       />
     </Section>
   );

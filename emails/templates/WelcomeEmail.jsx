@@ -34,7 +34,5 @@ export function WelcomeEmail({ firstName = "User" }) {
 
 const paragraphStyle = {
   fontSize: '16px',
-  color: '#666666',
   lineHeight: '1.5',
-  marginBottom: '20px',
 };
