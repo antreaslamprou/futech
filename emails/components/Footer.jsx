@@ -1,32 +1,35 @@
 import { Section, Text } from '@react-email/components';
 
 export function EmailFooter() {
-  return (
-    <Section>
-        <Text style={bodyStyle}>
-            Best Regards,
-        </Text>
+    return (
+        <Section>
+            <Text style={regardsStyle}>
+                Best Regards,
+            </Text>
 
-        <Text style={bodyStyle}>
-            Futech
-        </Text>
+            <Text style={companyStyle}>
+                Futech
+            </Text>
 
-        <Text style={footerStyle}>
-            Disclaimer: This is purely a fictional company made to showcase my developing skills.
-        </Text>
-    </Section>
-  );
+            <Text style={disclaimerStyle}>
+                Disclaimer: This is a purely fictional company made to showcase my developing skills. No services or products will be provided.
+            </Text>
+        </Section>
+    );
 }
 
-const bodyStyle = {
-    color: '#ffffff',
-    fontFamily: 'Arial, sans-serif',
-    margin: 0,
-    padding: 0,
-}
 
-const footerStyle = {
+const regardsStyle = {
+  fontSize: '16px',
+};
+
+const companyStyle = {
+  fontSize: '18px',
+  fontWeight: 'bold',
+};
+
+const disclaimerStyle = {
     fontSize: '14px',
     color: '#999999',
-    marginTop: '30px',
+    margin: '30px 0',
 };

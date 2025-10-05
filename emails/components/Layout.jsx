@@ -28,8 +28,9 @@ const bodyStyle = {
 const containerStyle = {
   color: '#ffffff',
   fontFamily: 'Arial, sans-serif',
+  fontSize: '16px',
   maxWidth: '600px',
   margin: '0 auto',
-  padding: '0 10px',
+  padding: '0 20px',
   overflow: 'hidden',
 };
