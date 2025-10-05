@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { fetchOrders, fetchOrderItems, fetchCountryByCodeJSON } from '@/lib/api';
+import { fetchOrders, fetchOrderItems } from '@/lib/api';
 import ProfileTab from './ProfileTab';
 import OrdersTab from './OrdersTab';
 import SettingsTab from './SettingsTab';
@@ -15,18 +15,6 @@ export default function AccountTabs() {
         { key: 'orders', label: 'Order History' },
         { key: 'settings', label: 'Settings' },
     ];
-
-    // For Profile tab
-    const [userCountry, setUserCountry] = useState("");
-    useEffect(() => {
-        (async () => {
-            const countryCode = user?.country;
-            if (countryCode) {
-                const country = await fetchCountryByCodeJSON(countryCode);
-                setUserCountry(`${countryCode} | ${country}`)
-            }
-        })();
-    }, []);
 
     // For Orders tab
     const user = useSelector((state) => state.currentUser.user);
@@ -75,7 +63,7 @@ export default function AccountTabs() {
             </div>
             <hr className="h-1 mb-6 -mt-3 text-gray-700" />
             <div className="flex h-full w-full items-center justify-center">
-                {activeTab === 'profile' && <ProfileTab country={userCountry} />}
+                {activeTab === 'profile' && <ProfileTab />}
                 {activeTab === 'orders' && <OrdersTab orders={orders} orderItemsMap={orderItemsMap} />}
                 {activeTab === 'settings' && <SettingsTab />}
             </div>

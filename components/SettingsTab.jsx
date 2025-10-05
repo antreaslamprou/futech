@@ -55,7 +55,7 @@ export default function SettingsTab() {
         try {
             const data  = await updateUser(user.email, formData)
             if (data.success) {
-                dispatch(setUser(formData));
+                dispatch(setUser({ ...user, ...formData }));
                 toast.success("User updated!");
             } else {
                 toast.error(data.error || "Update failed");
