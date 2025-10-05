@@ -15,7 +15,7 @@ export function CustomButton({ href, children }) {
 }
 
 const buttonWrapperStyle = {
-    margin: '20px 0',
+    margin: '30px 0',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

@@ -4,7 +4,11 @@ export function EmailFooter() {
   return (
     <Section>
         <Text style={bodyStyle}>
-            Best Regards,<br/>Futech
+            Best Regards,
+        </Text>
+
+        <Text style={bodyStyle}>
+            Futech
         </Text>
 
         <Text style={footerStyle}>
