@@ -73,7 +73,6 @@ html::-webkit-scrollbar-thumb:hover {
     @apply text-xl opacity-80;
   }
 
-
   p, li, input, select, option, label, button, a {
     @apply font-timeburner text-white text-xl my-3 font-bold tracking-wider;
   }

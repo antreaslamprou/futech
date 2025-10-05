@@ -1,4 +1,5 @@
 import { createUser, getUserByEmail } from "@/lib/db";
+import { sendWelcomeEmail } from "@/services/emailService"
 import bcrypt from "bcryptjs";
 
 export async function POST(req) {
@@ -22,6 +23,12 @@ export async function POST(req) {
     const hashed = await bcrypt.hash(password, BCRYPT_SALT_ROUNDS);
     const newUser = await createUser({ firstName, lastName, email, password: hashed, address, country });
 
+    try {
+      await sendWelcomeEmail(email, firstName);
+    } catch (emailError) {
+      console.error("Failed to send welcome email:", emailError);
+    }
+    
     return new Response(JSON.stringify({ success: true, user: newUser }), {
       status: 201,
       headers: { "Content-Type": "application/json" },
