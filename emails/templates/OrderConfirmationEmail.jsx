@@ -3,7 +3,7 @@ import { CustomButton } from '../components/Button';
 import { Section, Text, Row, Column, Img } from '@react-email/components';
 import { formatStringToDashCase } from '@/utils/formatters';
 
-export function OrderConfirmationEmail({ firstName, orderData }) {
+export function OrderConfirmationEmail({ firstName = "User", orderData }) {
   return (
     <EmailLayout title="Order Confirmed!">
       <Section>

@@ -12,8 +12,8 @@ const EMAIL_TEMPLATES = {
     text: (data) => `Thank you for your order #${data.orderId}.`,
   },
   passwordReset: {
-    subject: () => 'Password Reset Request.',
-    text: (data) => `Click here to reset your password: ${data.resetUrl}`,
+    subject: () => 'Password reset request.',
+    text: (data) => `Click here to reset your password: ${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?token=${data.token}`,
   }
 };
 
@@ -53,5 +53,5 @@ export const sendOrderConfirmation = (userEmail, firstName, orderData) =>
     orderData: orderData
   });
 
-export const sendPasswordReset = (userEmail, resetData) => 
-  sendEmail('passwordReset', userEmail, resetData);
+export const sendPasswordReset = (userEmail, token) => 
+  sendEmail('passwordReset', userEmail, { token });

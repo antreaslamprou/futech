@@ -24,7 +24,7 @@ export async function POST(req) {
     try {
       await sendOrderConfirmation(email, user.firstName, orderData);
     } catch (emailError) {
-      console.error("Failed to send welcome email:", emailError);
+      console.error("Failed to order confirmation email:", emailError);
     }
     
     return new Response(

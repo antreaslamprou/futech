@@ -20,17 +20,17 @@ export function EmailLayout({ children, title = "Futech" }) {
 }
 
 const bodyStyle = {
-  backgroundColor: '#0f1114',
   margin: 0,
   padding: 0,
 };
 
 const containerStyle = {
+  backgroundColor: '#0f1114',
   color: '#ffffff',
   fontFamily: 'Arial, sans-serif',
   fontSize: '16px',
   maxWidth: '600px',
   margin: '0 auto',
-  padding: '0 20px',
+  padding: '0 30px',
   overflow: 'hidden',
 };
