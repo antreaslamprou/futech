@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import CustomInputField from 'components/CustomInputField';
 import FullPageLoader from 'components/FullPageLoader';
-import { fetchUserByEmail } from '@/lib/api';
+import { fetchUserByEmail, sendPasswordResetLink } from '@/lib/api';
 import toast from 'react-hot-toast';
 
 
@@ -24,13 +24,15 @@ export default function ForgotPassword() {
 
     async function handleResetLink() {
         if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) return toast.error("Please enter a valid email");
+        
         try {
             const user = await fetchUserByEmail(email);
             if (user) {
+                await sendPasswordResetLink(user.id, email);
                 toast.success("Reset link send to your email");
             }
-        } catch {
-            toast.error("No user found with this email");
+        } catch (e) {
+            toast.error(e.message || "Something went wrong");
         }
     }
 
