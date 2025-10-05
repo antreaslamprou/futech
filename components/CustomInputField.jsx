@@ -22,7 +22,7 @@ export default function InputField({ id, label, type = "text", value, className,
                 onChange={onChange}
                 onFocus={onFocus}
                 onBlur={onBlur}
-                name="email"
+                name={id}
                 className="peer"
                 required={required}
             />

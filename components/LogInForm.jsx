@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import toast from 'react-hot-toast';
 import CustomInputField from './CustomInputField'
 import AuthButtons from "./AuthButtons";
@@ -47,6 +48,12 @@ function LogInForm() {
                     label="Password" 
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <Link
+                    href="/forgot-password"
+                    className="ps-2.5 mt-0"
+                    >
+                    Forgot your Password?
+                </Link>
             </div>
 
             <button type="submit" className="btn-lg mt-10 mx-auto">
