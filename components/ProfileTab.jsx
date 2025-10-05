@@ -1,30 +1,17 @@
 import { useSelector } from 'react-redux';
 import { formatKey, formatDate } from '@/utils/formatters';
-import { useState, useEffect } from 'react';
-import { fetchCountryByCodeJSON } from '@/lib/api';
 
 
 export default function ProfileTab() {
     const user = useSelector((state) => state.currentUser.user);
-
-    const [userCountry, setUserCountry] = useState("");
-
-    useEffect(() => {
-        (async () => {
-            const countryCode = user?.country;
-            if (countryCode) {
-                const country = await fetchCountryByCodeJSON(countryCode);
-                setUserCountry(`${countryCode} | ${country}`)
-            }
-        })();
-    }, [user?.country]);
+    const countries = useSelector((state) => state.countries);
 
     const userDetails = Object.entries({
         firstName: user?.firstName,
         lastName: user?.lastName,
         email: user?.email,
         address: user?.address,
-        country: userCountry,
+        country: `${user?.country} | ${countries[user?.country]}`,
     });
 
     return (

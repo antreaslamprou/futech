@@ -5,12 +5,14 @@ import { SessionProvider, useSession } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
 import { setUser, clearUser } from 'store/features/currentUserReducer';
 import { addProducts } from 'store/features/productsReducer';
-import { getUser, fetchProductsJSON } from '@/lib/api';
+import { addCountries } from 'store/features/countriesReducer';
+import { getUser, fetchProductsJSON, fetchCountriesJSON } from '@/lib/api';
 import { Toaster } from 'react-hot-toast';
 import ReduxProvider from 'store/providers/ReduxProvider';
 import FullPageLoader from './FullPageLoader';
 
 
+// Save user data to redux from session email
 function SessionSync({ children }) {
   const { status } = useSession();
   const dispatch = useDispatch();
@@ -38,14 +40,19 @@ function SessionSync({ children }) {
   return children;
 }
 
-function GetProducts({children}) {
+// Save products and countries to redux
+function GetData({children}) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
+      // Products
       const products = await fetchProductsJSON();
       dispatch(addProducts(products));
+      // Countries
+      const countries = await fetchCountriesJSON();
+      dispatch(addCountries(countries));
       setIsLoading(false);
     })();
   }, [dispatch]);
@@ -61,10 +68,10 @@ export default function ClientLayout({ children }) {
     <ReduxProvider>
       <SessionProvider>
         <SessionSync>
-          <GetProducts>
+          <GetData>
             <Toaster position="top-center" reverseOrder={false} />
             {children}
-          </GetProducts>
+          </GetData>
         </SessionSync>        
       </SessionProvider>
     </ReduxProvider>

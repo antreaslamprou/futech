@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage
 import currentUserReducer from './features/currentUserReducer'
 import basketReducer from './features/basketReducer'
 import productsReducer from './features/productsReducer';
+import countriesReducer from './features/countriesReducer';
 
 
 const persistConfig = {
@@ -19,7 +20,8 @@ export const store = configureStore({
   reducer: {
     currentUser: currentUserReducer,
     basket: persistedReducer,
-    products: productsReducer
+    products: productsReducer,
+    countries: countriesReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
