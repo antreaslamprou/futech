@@ -5,11 +5,11 @@ export function EmailHeader() {
         <Section style={headerStyle}>
             <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}`} style={linkStyle}>
                 <Img 
-                        src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/futech.webp`} 
-                        alt="FUTECH" 
-                        width="250" 
-                        height="95" 
-                        style={logoStyle}
+                    src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/futech.webp`} 
+                    alt="FUTECH" 
+                    width="250" 
+                    height="95" 
+                    style={logoStyle}
                 />
             </Link>
     </Section>

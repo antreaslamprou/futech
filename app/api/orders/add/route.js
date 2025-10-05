@@ -1,4 +1,5 @@
 import { addOrder } from "@/lib/db";
+import { sendOrderConfirmation } from "@/services/emailService"
 
 export async function POST(req) {
   try {
@@ -14,11 +15,23 @@ export async function POST(req) {
 
     const result = await addOrder(basket, user.id);
 
+    const orderData =  {
+      id: result.id || result.orderId, 
+      total: result.total,
+      items: basket
+    };
+    
+    try {
+      await sendOrderConfirmation(email, user.firstName, orderData);
+    } catch (emailError) {
+      console.error("Failed to send welcome email:", emailError);
+    }
+    
     return new Response(
       JSON.stringify({ success: true, orderId: result.orderId }),
       { status: 200 }
     );
-
+    
   } catch (error) {
     console.error('Checkout error:', error);
     return new Response(

@@ -1,13 +1,13 @@
-// import { sendWelcomeEmail } from "@/services/emailService"
+// import { sendOrderConfirmation } from "@/services/emailService"
 
 
 // export async function POST(req) {
 //   try {
 //     const body = await req.json();
-//     const { firstName, email } = body;
+//     const { email, firstName, orderData } = body;
 
 //     try {
-//       await sendWelcomeEmail(email, firstName);
+//       await sendOrderConfirmation(email, firstName, orderData);
 //     } catch (emailError) {
 //       console.error("Failed to send welcome email:", emailError);
 //     }

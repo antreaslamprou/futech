@@ -4,21 +4,17 @@ import { renderEmail } from '@/lib/emailRenderer';
 // Fallback email templates for html emails
 const EMAIL_TEMPLATES = {
   welcome: {
-    subject: () => `Welcome to Futech! Your registration is complete`,
+    subject: () => `Welcome to Futech! Your registration is complete.`,
     text: (data) => `Welcome to Futech, ${data.firstName}! Thank you for joining our community.`,
   },
   orderConfirmation: {
-    subject: (data) => `Order Confirmation #${data.orderId}`,
-    text: (data) => `Thank you for your order #${data.orderId}. Total: $${data.total}`,
+    subject: (data) => `Your order is confirmed.`,
+    text: (data) => `Thank you for your order #${data.orderId}.`,
   },
   passwordReset: {
-    subject: () => 'Password Reset Request',
+    subject: () => 'Password Reset Request.',
     text: (data) => `Click here to reset your password: ${data.resetUrl}`,
-  },
-  contactForm: {
-    subject: (data) => `New Contact Form: ${data.subject}`,
-    text: (data) => `New message from ${data.name} (${data.email}): ${data.message}`,
-  },
+  }
 };
 
 export async function sendEmail(templateName, userEmail, data = {}) {
@@ -51,8 +47,11 @@ export async function sendEmail(templateName, userEmail, data = {}) {
 export const sendWelcomeEmail = (userEmail, firstName) => 
   sendEmail('welcome', userEmail, { firstName });
 
-export const sendOrderConfirmation = (userEmail, orderData) => 
-  sendEmail('orderConfirmation', userEmail, orderData);
+export const sendOrderConfirmation = (userEmail, firstName, orderData) => 
+  sendEmail('orderConfirmation', userEmail, { 
+    firstName: firstName,
+    orderData: orderData
+  });
 
 export const sendPasswordReset = (userEmail, resetData) => 
   sendEmail('passwordReset', userEmail, resetData);

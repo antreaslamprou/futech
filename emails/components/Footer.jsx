@@ -24,7 +24,7 @@ const regardsStyle = {
 };
 
 const companyStyle = {
-  fontSize: '18px',
+  fontSize: '16px',
   fontWeight: 'bold',
 };
 
