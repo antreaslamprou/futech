@@ -71,7 +71,7 @@ export async function POST(req) {
   } catch (err) {
     console.error("error:", err);
     return new Response(
-      JSON.stringify({ success: false, error: "Failed to reset link" }),
+      JSON.stringify({ success: false, error: "Failed to reset password" }),
       { status: 500 }
     );
   }
