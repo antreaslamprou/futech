@@ -13,7 +13,7 @@ export default function PageNotFound() {
             alt="Error Icon"
             unoptimized
         />
-        <h1 className="mb-10 md:mb-15 text-center">Page Not Found</h1>
+        <h1 className="text-center">Page Not Found</h1>
         
         <p className='text-center'>We couldn't find the page you were looking for. <br className="hidden md:block"/>The page either does not exist or it has been removed.</p>
         <p className="my-5 flex justify-center">

@@ -23,11 +23,11 @@ export default function LogIn() {
     }
 
     return (<>
-        <h1 className='mb-10'>Log In</h1>
+        <h1>Log In</h1>
         <LogInForm />
         <Link 
             href='/register'
-            className='mt-10 md:mt-20 text-xl text-center' 
+            className='mt-10 md:mt-15 text-xl text-center' 
         >
             New Member?<br/>Swap to Sign Up!
         </Link>

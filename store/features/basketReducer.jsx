@@ -21,7 +21,7 @@ export const basketReducer = createSlice({
         const item = state.basket.find(item => item.id === id);
         if (item && quantity > 1) {
             item.quantity -= 1;
-            item.totalPrice = quantity * item.price;
+            item.totalPrice = item.quantity * item.price;
         } else if (item && quantity === 1) {
             state.basket = state.basket.filter(item => item.id !== id);
         }

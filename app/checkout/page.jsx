@@ -54,7 +54,7 @@ export default function Checkout() {
   }
   
   return (<>
-    <h1 className="mb-10">Checkout</h1>
+    <h1>Checkout</h1>
     { basket.length > 0 ? (
       <>
         <h3 className="mb-10 text-center md:text-start">Bellow you can see the items in your basket:</h3>

@@ -8,11 +8,14 @@ import CustomInputField from 'components/CustomInputField';
 import FullPageLoader from 'components/FullPageLoader';
 import { fetchUserByEmail, sendPasswordResetLink } from '@/lib/api';
 import toast from 'react-hot-toast';
+import FormButton from '@/components/FormButton';
 
 
 export default function ForgotPassword() {
     const user = useSelector((state) => state.currentUser.user);
     const router = useRouter();
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const [email, setEmail] = useState("");
     
@@ -26,6 +29,7 @@ export default function ForgotPassword() {
         if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) return toast.error("Please enter a valid email");
         
         try {
+            setIsLoading(true);
             const user = await fetchUserByEmail(email);
             if (user) {
                 await sendPasswordResetLink(user.id, email);
@@ -33,6 +37,8 @@ export default function ForgotPassword() {
             }
         } catch (e) {
             toast.error(e.message || "Something went wrong");
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -41,7 +47,7 @@ export default function ForgotPassword() {
     }
 
     return (<>
-        <h1 className="mb-10 md:mb-20">Forgot Your Password</h1>
+        <h1>Forgot Your Password</h1>
         <p>Please enter your email:</p>
         <div className="form-control">
             <CustomInputField 
@@ -52,20 +58,19 @@ export default function ForgotPassword() {
                 onChange={(e) => setEmail(e.target.value)}
             />
         </div>
-        <div className="mt-10 md:mt-20 flex gap-10">
+        <div className="mt-10 md:mt-20 flex gap-5 md:gap-10">
             <Link 
                 href='/login'
-                className='text-xl text-center btn-lg bg-red-900' 
+                className='text-center btn-lg bg-red-900' 
             >
                 Go Back
             </Link>
-            <button 
-                href='/'
-                className='text-xl text-center btn-lg' 
+            <FormButton 
+                isLoading={isLoading}
                 onClick={() => handleResetLink()}
             >
                 Send Reset Link
-            </button>
+            </FormButton>
         </div>
     </>);
 }

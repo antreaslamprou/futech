@@ -62,7 +62,7 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl text-center lg:text-start;
+    @apply text-4xl md:text-5xl lg:text-6xl text-center lg:text-start mb-10 md:mb-15;
   }
 
   h3 {
@@ -134,7 +134,11 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .btn-lg {
-    @apply px-10 md:px-16 md:py-5 text-2xl;
+    @apply px-10 md:px-16 md:py-5 text-xl md:text-2xl;
+  }
+
+  .form-btn {
+    @apply mx-auto mt-10;
   }
 
   .account-content {

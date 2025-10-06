@@ -6,9 +6,14 @@ import { updateUser } from '@/lib/api';
 import { formatKey } from '@/utils/formatters';
 import toast from 'react-hot-toast';
 import CustomSelectField from '@/components/CustomSelectField'
+import FormButton from "./FormButton";
 
 
 export default function SettingsTab() {
+    const [isLoading, setIsLoading] = useState({
+        save: false,
+        logout: false,
+    });
     const user = useSelector((state) => state.currentUser.user);
     const dispatch = useDispatch();
 
@@ -53,6 +58,8 @@ export default function SettingsTab() {
 
     async function saveEdit() {
         try {
+            setAreDataChanged(false);
+            setIsLoading({...isLoading, save: true});
             const data  = await updateUser(user.email, formData)
             if (data.success) {
                 dispatch(setUser({ ...user, ...formData }));
@@ -64,7 +71,7 @@ export default function SettingsTab() {
             console.error(err);
             toast.error("Unexpected error during update");
         } finally {
-            setAreDataChanged(false);
+            setIsLoading({...isLoading, save: false});
         }
     }
 
@@ -80,7 +87,8 @@ export default function SettingsTab() {
         setAreDataChanged(false);
     };
 
-    function logout() {
+    function logOut() {
+        setIsLoading({...isLoading, logout: true});
         signOut({ callbackUrl: "/login" });
     }
 
@@ -121,22 +129,23 @@ export default function SettingsTab() {
                 >
                     Cancel
                 </button>
-                <button 
-                    className="btn-lg bg-green-600"
-                    onClick={saveEdit}
-                    disabled={!areDataChanged}
+                <FormButton 
+                className="btn-lg"
+                isLoading={isLoading.save}
+                disabled={!areDataChanged}
+                onClick={saveEdit}
+                buttonColor="bg-green-600"
                 >
                     Save
-                </button>
+                </FormButton>
             </div>
-            <div className="flex justify-center mt-5">
-                <button 
-                    className="btn-lg"
-                    onClick={logout}
-                >
-                    Log Out
-                </button>
-            </div>
+            <FormButton 
+                className="form-btn"
+                isLoading={isLoading.logout}
+                onClick={logOut}
+            >
+                Log Out
+            </FormButton>
         </div>
     );
 }

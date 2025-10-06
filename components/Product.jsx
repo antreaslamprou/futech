@@ -11,14 +11,14 @@ import toast from "react-hot-toast";
 
 
 export default function Product({product, position, button, showPrice}) {
-    var textAlign = "md:text-start";
+    var textAlign = "md:text-start mb-0";
     var buttonAlign = "md:justify-start";
     var imageOrder = "md:order-0";
     var imageAnimation = "md:animate-slideIn-left";
     var textAnimation = "md:animate-slideIn-right";
 
     if (position === "right") {
-        textAlign = "md:text-end";
+        textAlign = "md:text-end  mb-0";
         buttonAlign = "md:justify-end";
         imageOrder = "md:order-2";
         imageAnimation = "md:animate-slideIn-right";

@@ -3,20 +3,33 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { loginValidations } from '@/utils/validationSchemas';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import CustomInputField from './CustomInputField'
 import AuthButtons from "./AuthButtons";
+import FormButton from './FormButton';
 
 
 function LogInForm() {
+    const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
     const router = useRouter();
 
     async function handleSubmit(e) {
         e.preventDefault();
 
+        const formData = { email, password };
+        for (const validation of loginValidations) {
+            if (!validation.valid(formData)) {
+                toast.error(validation.error);
+                return;
+            }
+        }
+
+        setIsLoading(true);
         const res = await signIn("credentials", {
             redirect: false,
             email,
@@ -27,6 +40,7 @@ function LogInForm() {
             router.push("/account");
         } else {
             toast.error("Invalid email or password");
+            setIsLoading(false);
         }
     };
 
@@ -56,9 +70,13 @@ function LogInForm() {
                 </Link>
             </div>
 
-            <button type="submit" className="btn-lg mt-10 mx-auto">
+            <FormButton 
+                type="submit"
+                isLoading={isLoading}
+                className="form-btn"
+            >
                 Log In
-            </button>
+            </FormButton>
         </form>
         <AuthButtons />
     </>);

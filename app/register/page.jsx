@@ -23,11 +23,11 @@ export default function Register() {
     }
 
     return (<>
-        <h1 className='mb-10'>Sign Up</h1>
+        <h1>Sign Up</h1>
         <SignUpForm />
         <Link 
             href='/login'
-            className='mt-10 md:mt-20 text-xl text-center' 
+            className='mt-10 md:mt-15 text-xl text-center' 
         >
             Already a Member?<br/>Swap to Log In!
         </Link>
