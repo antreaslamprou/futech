@@ -47,6 +47,7 @@ export default function AuthButtons() {
       { providers.map((provider) => (
         <button 
           key={provider.name} 
+          className="max-md:w-full"
           style={{ backgroundColor: provider.color }}
           onClick={() => onProviderClick(provider.name)} 
         >
